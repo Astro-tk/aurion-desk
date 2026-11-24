@@ -1,0 +1,19 @@
+Type,Source,Channel,Consent,Stage,Status
+QS practice,Warm network,1. Warm network,Not asked,New,Not started
+Consulting engineers,LinkedIn search A,2. LinkedIn,Asked,Permission given,In progress
+Contractor,LinkedIn search B,3. Firm email,Yes,Checker used,Done
+Partner,LinkedIn search C,4. Partners,No (never contact),Audit booked,
+ESD manager,LinkedIn search D,5. Reels and posts,,Audit done,
+ESD implementer,LinkedIn search E,6. BOQ Checker,,Proposal sent,
+Warm contact,Google Maps,7. Search,,Signed,
+Past client,CESA directory,8. Talks,,Not now,
+Other,Leads 2 Business,9. Trade press,,,
+,CIDB register,10. Communities,,,
+,Google search,11. Past clients,,,
+,Partner search,12. BeeLevel's audience,,,
+,Referral,,,,
+,Website form,,,,
+,BOQ Checker,,,,
+,Talk or event,,,,
+,Community group,,,,
+,Past client,,,,

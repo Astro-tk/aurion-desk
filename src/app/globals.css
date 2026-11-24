@@ -1,0 +1,162 @@
+@import 'tailwindcss';
+
+/*
+ * Aurion design tokens. Dark #1F2A2E canvas, lime #C1FF72 as the single accent.
+ * Light mode swaps the neutrals; the accent stays lime (on dark text) in both.
+ * No gradients. Tabular numerals everywhere numbers line up.
+ */
+@custom-variant dark (&:where(.theme-dark, .theme-dark *));
+
+:root,
+.theme-dark {
+  --canvas: #1f2a2e;
+  --surface: #26343a;
+  --surface-2: #2d3d44;
+  --line: #3a4b52;
+  --ink: #eef3f1;
+  --ink-2: #b9c6c3;
+  --ink-3: #8a9a97;
+  --accent: #c1ff72;
+  --accent-ink: #1f2a2e;
+  --danger: #ff8a7a;
+  --danger-bg: #4a2b2a;
+  --warn: #ffd27a;
+  --warn-bg: #4a3f25;
+  --ok: #c1ff72;
+  --focus: #c1ff72;
+  color-scheme: dark;
+}
+
+.theme-light {
+  --canvas: #f5f7f6;
+  --surface: #ffffff;
+  --surface-2: #eef2f1;
+  --line: #d5dddb;
+  --ink: #1f2a2e;
+  --ink-2: #44555b;
+  --ink-3: #6b7b80;
+  --accent: #c1ff72;
+  --accent-ink: #1f2a2e;
+  --danger: #b3261e;
+  --danger-bg: #fbe4e1;
+  --warn: #7a5a00;
+  --warn-bg: #fff3d1;
+  --ok: #2f6b00;
+  --focus: #1f2a2e;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-danger: var(--danger);
+  --color-danger-bg: var(--danger-bg);
+  --color-warn: var(--warn);
+  --color-warn-bg: var(--warn-bg);
+  --color-ok: var(--ok);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+}
+
+@layer base {
+  html {
+    background: var(--canvas);
+    color: var(--ink);
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply font-sans text-[15px] leading-snug antialiased;
+    min-height: 100dvh;
+  }
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+  table {
+    font-variant-numeric: tabular-nums;
+  }
+  a {
+    color: inherit;
+  }
+}
+
+@layer components {
+  .num {
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .btn {
+    @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-line bg-surface-2 px-3 text-sm font-medium text-ink hover:border-ink-3 disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-md bg-accent px-3 text-sm font-semibold text-accent-ink hover:brightness-95 disabled:opacity-50;
+  }
+  .btn-danger {
+    @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-danger px-3 text-sm font-semibold text-danger hover:bg-danger-bg disabled:opacity-50;
+  }
+  .btn-sm {
+    @apply min-h-8 px-2 text-xs;
+  }
+  .input {
+    @apply block min-h-10 w-full rounded-md border border-line bg-canvas px-3 py-2 text-[16px] text-ink placeholder:text-ink-3 sm:text-sm;
+  }
+  .label {
+    @apply mb-1 block text-xs font-medium tracking-wide text-ink-2 uppercase;
+  }
+  .card {
+    @apply rounded-lg border border-line bg-surface;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full border border-line px-2 py-0.5 text-xs whitespace-nowrap text-ink-2;
+  }
+  .chip-accent {
+    @apply inline-flex items-center gap-1 rounded-full bg-accent px-2 py-0.5 text-xs font-semibold whitespace-nowrap text-accent-ink;
+  }
+  .chip-danger {
+    @apply inline-flex items-center gap-1 rounded-full bg-danger-bg px-2 py-0.5 text-xs font-semibold whitespace-nowrap text-danger;
+  }
+  .chip-warn {
+    @apply inline-flex items-center gap-1 rounded-full bg-warn-bg px-2 py-0.5 text-xs font-semibold whitespace-nowrap text-warn;
+  }
+  .data-table {
+    @apply w-full border-collapse text-sm;
+  }
+  .data-table thead th {
+    @apply sticky top-0 z-10 border-b border-line bg-surface-2 px-3 py-2 text-left text-xs font-semibold tracking-wide whitespace-nowrap text-ink-2 uppercase;
+  }
+  .data-table tbody td {
+    @apply border-b border-line px-3 py-2 align-top;
+  }
+  .data-table tbody tr:hover {
+    @apply bg-surface-2;
+  }
+  .prose-desk h3 {
+    @apply mt-4 mb-2 text-base font-semibold;
+  }
+  .prose-desk p {
+    @apply my-2 text-ink-2;
+  }
+  .prose-desk ul,
+  .prose-desk ol {
+    @apply my-2 ml-5 list-outside text-ink-2;
+  }
+  .prose-desk ul {
+    @apply list-disc;
+  }
+  .prose-desk ol {
+    @apply list-decimal;
+  }
+  .prose-desk code {
+    @apply rounded bg-surface-2 px-1 font-mono text-[13px] break-words;
+  }
+  .prose-desk a {
+    @apply underline decoration-ink-3 underline-offset-2;
+  }
+}

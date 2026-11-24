@@ -1,0 +1,53 @@
+{
+  "name": "aurion-desk",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Aurion Desk: Aurion Creative's private operating centre.",
+  "type": "module",
+  "engines": {
+    "node": ">=20.9"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "db:schema": "tsx scripts/build-schema.ts",
+    "gen:capabilities": "tsx scripts/gen-capabilities.ts",
+    "seed:owner": "tsx scripts/seed-owner.ts",
+    "seed:demo": "tsx scripts/seed-demo.ts",
+    "import:pipeline": "tsx scripts/import-pipeline.ts",
+    "import:blueprint": "tsx scripts/import-blueprint.ts",
+    "ingest:test": "tsx scripts/ingest-test.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "1.13.0",
+    "@supabase/ssr": "0.12.7",
+    "@supabase/supabase-js": "2.119.2",
+    "fflate": "0.8.3",
+    "mdast-util-from-markdown": "2.1.0",
+    "mdast-util-gfm": "3.1.0",
+    "micromark-extension-gfm": "3.0.0",
+    "next": "16.4.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "server-only": "0.0.1",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.6.0",
+    "@tailwindcss/postcss": "4.3.5",
+    "@types/mdast": "4.0.4",
+    "@types/node": "22.20.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "postgres": "3.4.9",
+    "tailwindcss": "4.3.5",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "vitest": "5.1.1"
+  }
+}

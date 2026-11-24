@@ -1,0 +1,12 @@
+Firm,Type,Town,Website,Contact,Role,LinkedIn URL,Email,Source,First contact date,Channel,Consent,Stage,Next action,Next date,Notes
+Fictional QS Partners,QS practice,Centurion,fictionalqs.example,Ayanda Example,Director,https://www.linkedin.com/in/ayanda-example,ayanda@fictionalqs.example,LinkedIn search A,2026-12-01,2. LinkedIn,Asked,Permission given,Send L2,2026-12-04,Accepted invite on 1 Dec
+Sample Consulting Engineers,Consulting engineers,Pretoria,https://sample-ce.example,Pieter Sample,Principal,,pieter@sample-ce.example,CESA directory,02/12/2026,3. Firm email,Yes,Checker used,Send L3,2026-12-08,"Used the Checker, liked the units check"
+Demo Builders,Contractor,Midrand,,Lerato Demo,Estimator,,lerato@demobuilders.example,Google Maps,3 Dec 2026,Firm email,No (never contact),Not now,,,Asked us not to contact again
+Placeholder Bookkeeping,Partner,Pretoria,,Sam Placeholder,Owner,,sam@placeholder.example,Partner search,2026-12-03,4. Partners,,New,Send P1,2026-12-05,
+Fictional QS Partners,QS practice,Centurion,,Second Person,Estimator,,AYANDA@fictionalqs.example,LinkedIn search A,2026-12-02,2. LinkedIn,,New,,,Duplicate email of row 2
+Nowhere Engineering,Engineering office,Sandton,,Mia Nowhere,Director,,mia@nowhere.example,LinkedIn search C,2026-12-02,2. LinkedIn,Asked,New,,,Type is not in the list
+Bad Date Contractors,Contractor,Randburg,,Kabelo Bad,Owner,,kabelo@baddate.example,CIDB register,31/11/2026,3. Firm email,,New,,,Impossible date
+Wrong Stage Ltd,Contractor,Pretoria,,Thandi Wrong,Owner,,thandi@wrongstage.example,Google search,2026-12-04,3. Firm email,Maybe,Interested,,,Bad consent and bad stage
+Broken Email Pty,QS practice,Centurion,,Broken Person,Director,,broken-at-example,Google Maps,2026-12-04,3. Firm email,,New,,,
+,,,,,,,,Referral,2026-12-05,1. Warm network,,New,Call,2026-12-06,No firm or person
+Warm Friend,Warm contact,Pretoria,,Naledi Friend,Lecturer,linkedin.com/in/naledi-friend,naledi@friend.example,Warm network,2026-12-01,1. Warm network,Yes,Permission given,Ask for two introductions,2026-11-20,

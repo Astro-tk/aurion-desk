@@ -1,0 +1,5 @@
+# Keep LF everywhere so migration fingerprints are the same on every machine.
+* text=auto eol=lf
+*.png binary
+*.ico binary
+*.zip binary
