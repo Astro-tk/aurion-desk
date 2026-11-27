@@ -3,7 +3,7 @@ import { formatDateWithWeekday } from '@/lib/format';
 import type { DigestSection } from '../types';
 
 /** The order sections appear in the email. Anything not listed goes at the end. */
-export const SECTION_ORDER = ['inbox', 'promising', 'due_tomorrow', 'overdue', 'tasks', 'renewals', 'job_failures'];
+export const SECTION_ORDER = ['inbox', 'promising', 'due_tomorrow', 'overdue', 'tasks', 'renewals', 'bio_links', 'job_failures'];
 
 function esc(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');

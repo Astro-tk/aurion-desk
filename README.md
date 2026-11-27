@@ -140,7 +140,7 @@ This creates the `desk` schema, every table, every security rule, and the standa
 targets and platforms. It keeps its own history in `desk.schema_migrations`, so it never
 clashes with anything else in the project. Running it again later only applies new files.
 
-**You know it worked when** you see 15 lines `applying ... done`, then
+**You know it worked when** you see 16 lines `applying ... done`, then
 `This database is now marked as: production`. Check any time with:
 
 ```powershell
@@ -492,8 +492,34 @@ Tick each one on the live site. Use a private browser window for the last two.
 | 4 | The 18:00 digest arrives | Wait for 18:00 (Hobby: by 18:59) | One email "Aurion Desk, ..." |
 | 5 | Logged out, every page sends you to sign-in | Private window: open https://desk.aurioncreative.com/pipeline | You land on /login |
 | 6 | A login without 2FA cannot see data | Private window: sign in with the password, then on the code screen change the address to /pipeline | You are sent back to the code screen; nothing loads |
+| 7 | Bio link clicks are counted | On your phone, open https://aurioncreative.com/links?via=ig and tap WhatsApp | Desk > **Bio links** shows 1 view and 1 click from Instagram within a few seconds |
 
 Also check: https://desk.aurioncreative.com/robots.txt shows `Disallow: /`.
+
+### Bio links (aurioncreative.com/links)
+
+The page lives in the website repository (`links.html`, branch `bio-links`). Merge that branch
+on GitHub the same way as step 9; it works even before Desk is live (clicks are simply not
+counted until then). Then put one link in each bio, so Desk can tell which platform sent the
+visitor. **Desk > Bio links** lists the exact link for each platform:
+
+| Platform | Link |
+|---|---|
+| Instagram | `https://aurioncreative.com/links?via=ig` |
+| LinkedIn | `https://aurioncreative.com/links?via=li` |
+| Facebook | `https://aurioncreative.com/links?via=fb` |
+| YouTube | `https://aurioncreative.com/links?via=yt` |
+| TikTok | `https://aurioncreative.com/links?via=tt` |
+| WhatsApp Business profile | `https://aurioncreative.com/links?via=wa` |
+| Email signature | `https://aurioncreative.com/links?via=email` |
+| QR code on the one-pager | `https://aurioncreative.com/links?via=qr` |
+
+Counting is cookieless: Desk keeps no IP address and no personal data, only a visitor code
+that changes every day, and the page sends nothing when a browser asks not to be tracked.
+Someone who taps **Book a Workflow Audit** and sends the form arrives in the Inbox with
+`?from=bio&via=ig` (or similar) in the page address, so you can see which bio produced the lead.
+To change a link on the page, edit its `<a>` in `links.html`; keep its `data-link` value the same
+so its history in Desk carries on.
 
 ---
 
@@ -571,8 +597,10 @@ Example: turning on the Phase 2 `analytics` module.
   session reach only the 2FA screen; every database policy requires `aal2` in the session; and
   every server action checks `requireCapability`.
 - **Sessions** end 7 days after sign-in, or after 12 hours without activity.
-- **Public surface:** `/login`, `/login/2fa`, `/api/ingest/form`, `/api/ingest/chatbot`
-  (and `robots.txt`). The cron routes need `CRON_SECRET`. Everything else needs a full session.
+- **Public surface:** `/login`, `/login/2fa`, `/api/ingest/form`, `/api/ingest/chatbot`,
+  `/api/ingest/event` (bio-page views and clicks: origin allowlist, 2 KB limit, rate limit, bots
+  dropped, Do Not Track and GPC honoured) and `robots.txt`. The cron routes need `CRON_SECRET`.
+  Everything else needs a full session.
 - **Roles:** `owner` now; `viewer` and `assistant` reserved. Every rule is in
   `src/lib/auth/permissions.ts`; the database copy is generated from it and a test fails if
   they drift.
@@ -598,6 +626,7 @@ Example: turning on the Phase 2 `analytics` module.
 | Scorecard | `/scorecard`, `/scorecard/december` | targets, scorecard_entries | scorecard_entered |
 | Platforms | `/platforms`, `/platforms/[id]` | platforms | |
 | Digest | `/digest`, `/api/cron/*` | job_runs, notifications | |
+| Bio links | `/links`, `/api/ingest/event` | events (source website), via `desk.link_stats()` | link_page_view, link_click |
 | Settings | `/settings`, `/settings/export` | lists, members, audit_log | export_created, contact_forgotten |
 
 ### Commands
@@ -628,7 +657,7 @@ in the registry as "Coming later".
 
 | Module | Tables it will use | New tables | Events it reads or writes | Interface |
 |---|---|---|---|---|
-| **analytics** (P2) | events (indexed on time, source+type, subject, and `anon_id`) | none to start; a monthly rollup if page views grow | writes `page_view` (source website, cookieless `anon_id`, no personal data, honours Do Not Track); reads `form_submitted`, `lead_created`, `stage_changed` for funnels and attribution | AnalyticsSource |
+| **analytics** (P2) | events (indexed on time, source+type, subject, and `anon_id`) | none to start; a monthly rollup if page views grow | writes `page_view` (source website, cookieless `anon_id`, no personal data, honours Do Not Track); reads `form_submitted`, `lead_created`, `stage_changed` for funnels and attribution. The bio-links endpoint (`/api/ingest/event`, `src/integrations/website-events`) is its first piece: extend its event types rather than adding a second endpoint | AnalyticsSource |
 | **docs** (P2) | blueprint_documents (source markdown already stored) | documents (with a full-text search column); Supabase Storage bucket | `doc_uploaded` | none |
 | **ai** (P2) | leads (`summary`, `summary_is_ai_draft`, `ai_model` already exist), activities, scorecard_entries, consent_records | ai_drafts | `ai_draft_created`; must call `assertMayContact()` before any reply draft | AIProvider (built) |
 | uptime and hours (P2) | events, targets (`hours_worked` target exists, cap 10) | hours_log | `monitor_status` (source system) | AnalyticsSource |
