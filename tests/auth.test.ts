@@ -25,10 +25,10 @@ function decide(path: string, claims: AccessClaims | null, session: SessionCheck
 }
 
 const routes = allAppRoutes();
-const PUBLIC = new Set(['/login', '/login/2fa', '/api/ingest/form', '/api/ingest/chatbot', '/robots.txt']);
+const PUBLIC = new Set(['/login', '/login/2fa', '/api/ingest/form', '/api/ingest/chatbot', '/api/ingest/event', '/robots.txt']);
 
 describe('public surface', () => {
-  it('is only login, 2FA, the two ingest endpoints (and robots.txt); cron routes need CRON_SECRET', () => {
+  it('is only login, 2FA, the three ingest endpoints (and robots.txt); cron routes need CRON_SECRET', () => {
     for (const r of routes) {
       const kind = classifyPath(r.path);
       const reachableSignedOut = decide(r.path, null).type === 'pass';

@@ -4,7 +4,7 @@ import type { SessionCheck } from './session-cookie';
  * Pure access rules for every request. src/proxy.ts applies them; tests/access.test.ts
  * walks every page and API route in src/app and proves an aal1 session reaches none of them.
  *
- * Public surface: /login, /login/2fa, and the two ingest endpoints. Nothing else.
+ * Public surface: /login, /login/2fa, and the three ingest endpoints (form, chatbot, website events). Nothing else.
  */
 
 export type RouteKind =
@@ -16,7 +16,7 @@ export type RouteKind =
   | 'api' // every other /api route: needs aal2
   | 'app'; // every other page: needs aal2
 
-export const INGEST_PATHS = ['/api/ingest/form', '/api/ingest/chatbot'] as const;
+export const INGEST_PATHS = ['/api/ingest/form', '/api/ingest/chatbot', '/api/ingest/event'] as const;
 
 export function classifyPath(pathname: string): RouteKind {
   const path = pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname;

@@ -4,6 +4,7 @@ import pipeline from './pipeline';
 import inbox from './inbox';
 import blueprint from './blueprint';
 import scorecard from './scorecard';
+import links from './links';
 import platforms from './platforms';
 import digest from './digest';
 import settings from './settings';
@@ -24,6 +25,7 @@ export const MODULES: readonly ModuleManifest[] = [
   pipeline,
   blueprint,
   scorecard,
+  links,
   platforms,
   digest,
   settings,
