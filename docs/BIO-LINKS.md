@@ -59,7 +59,7 @@ Short version for print, where nobody can tap: `aurioncreative.com/links`. Visit
 
 | # | Button | Goes to | Name in Desk |
 |---|---|---|---|
-| 01 | Book a Workflow Audit (lime, first) | aurioncreative.com/contact.html | `audit` |
+| 01 | Book a Workflow Audit (lime, first) | Opens the enquiry form right there on the page (see below) | `audit` when opened, `audit-sent` when sent |
 | 02 | Website | aurioncreative.com | `website` |
 | 03 | Project Command | aurioncreative.com/project-command.html | `project-command` |
 | 04 | BeeLevel | aurioncreative.com/beelevel.html | `beelevel` |
@@ -69,6 +69,30 @@ Short version for print, where nobody can tap: `aurioncreative.com/links`. Visit
 | Key | Instagram | instagram.com/aurion_creative | `instagram` |
 | Key | Email | info@aurioncreative.com | `email` |
 | Key | Call | +27 65 546 5919 | `call` |
+
+### The audit form
+
+Tapping **Book a Workflow Audit** folds open a short form under the button, so nobody leaves
+the page. It grows as it is filled in, one step at a time, with a small 1/4 to 4/4 meter:
+
+1. **Your name.** The cursor lands here as soon as the panel opens.
+2. **Email** appears once the name is typed (two letters or more).
+3. **What do you need?** (preset to Workflow Audit) and **the work to take off your team**
+   appear once the email is a complete address.
+4. **WhatsApp number** (optional), the unticked consent box "Aurion may contact me about this
+   enquiry." and **SEND** appear once they start writing.
+
+It is **the same form as the contact page**: it posts to the same Formspree form
+(`xjgqqjdo`) with the same field names (`name`, `email`, `phone`, `service`, `message`,
+`consent`, and the `_gotcha` honeypot), so every enquiry still arrives in the same Formspree
+inbox. The only difference is the email subject, "New enquiry from aurioncreative.com links
+page", so you can tell where it came from. As on the website, a copy also goes to the Desk
+Inbox (shown as form `bio`, with the page address `links?via=ig` or similar).
+
+After sending, the form is replaced by "Thanks, we have your message. Expect a reply within
+24 hours." and a WhatsApp link. If Formspree cannot be reached, an error message offers
+info@aurioncreative.com and everything typed stays in place to try again. Without JavaScript,
+the panel still opens and shows the whole form, which posts straight to Formspree.
 
 Also on the page: the Aurion icon, "Engineering meets software.", the studio line from the
 website, and a ticker with the Founding Office offer (40% off setup, three places, closes
@@ -103,10 +127,11 @@ desk.events (source "website", type link_page_view or link_click)
 desk.link_stats()  ->  Desk > Bio links, the Today card, and the 18:00 digest
 ```
 
-**From a tap to a lead.** The Book a Workflow Audit button carries the source on to the contact
-form (`contact.html?from=bio&via=ig`). When the visitor sends the form, the copy that reaches the
-Desk Inbox shows that address, so you can see which bio produced the enquiry. Formspree still
-receives every form first, exactly as before.
+**From a tap to a lead.** The audit form sits on the page itself. When the visitor sends it,
+Formspree receives it exactly like a contact-page enquiry, and the copy that reaches the Desk
+Inbox is marked form `bio` with the page address (`links?via=ig`), so you can see which bio
+produced the enquiry. Desk also counts two clicks: `audit` when the form is opened and
+`audit-sent` when it is sent, so Bio links shows how many people who opened it finished it.
 
 **If Desk is down or not deployed yet,** the page works normally; that visit is simply not
 counted. Counting can never slow the page down or stop a link from opening.
@@ -176,8 +201,9 @@ card, and the **18:00 digest** includes a "Bio links today" section on days with
 
 **Reading it for decisions.** If one platform brings many views but few clicks, its audience is
 browsing rather than buying. If "Book a Workflow Audit" gets fewer clicks than "Pricing", people
-want the numbers first, so lead with pricing in posts. Check the Inbox for
-`from=bio` enquiries to see which platform produces real leads, not just taps.
+want the numbers first, so lead with pricing in posts. Compare "Book a Workflow Audit" (opened)
+with "Workflow Audit form sent": a big gap means the form is losing people. Check the Inbox for
+form `bio` enquiries to see which platform produces real leads, not just taps.
 
 ---
 
@@ -195,8 +221,12 @@ same, so its history in Desk carries on.
 - `data-link`: the short, stable name Desk counts by. Lower-case letters, numbers and `-` only,
   up to 40 characters.
 - `data-label`: the name Desk shows. Change it freely.
-- `data-carry-source`: add this to a link to the website when you want the `via` value passed
-  on to it (the audit button has it).
+
+**Change the audit form:** it is the `<details class="audit">` block. Keep the field `name`
+attributes as they are, because they must match the contact page's Formspree form. The steps are
+the `<div class="step">` blocks; the script reveals each one when the one before is filled in
+(the rules are in `ready()` near the end of the file). To change the service list, edit the
+`<select>`, keeping it the same as the contact page's.
 
 **Add a button:** copy one `<li>...</li>` block in the list, give it a new `data-link`, a
 `data-label`, the next number in `<span class="idx">`, and the destination. When the BOQ Checker
@@ -204,7 +234,7 @@ goes live (8 Dec), add it as 02:
 
 ```html
 <li>
-  <a class="btn" data-link="boq-checker" data-label="BOQ Checker" data-carry-source href="https://aurioncreative.com/boq-checker">
+  <a class="btn" data-link="boq-checker" data-label="BOQ Checker" href="https://aurioncreative.com/boq-checker">
     <span class="idx">02</span>
     <span class="txt"><strong>Check a BOQ free</strong><small>Arithmetic, missing rates and units, in two minutes</small></span>
     <span class="arrow" aria-hidden="true">&gt;</span>
