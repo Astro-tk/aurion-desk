@@ -498,6 +498,9 @@ Also check: https://desk.aurioncreative.com/robots.txt shows `Disallow: /`.
 
 ### Bio links (aurioncreative.com/links)
 
+Full guide: [docs/BIO-LINKS.md](docs/BIO-LINKS.md) (the links, how it works, privacy, editing the
+page, the endpoint, testing, troubleshooting). In short:
+
 The page lives in the website repository (`links.html`, branch `bio-links`). Merge that branch
 on GitHub the same way as step 9; it works even before Desk is live (clicks are simply not
 counted until then). Then put one link in each bio, so Desk can tell which platform sent the
