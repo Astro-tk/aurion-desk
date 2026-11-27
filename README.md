@@ -519,8 +519,9 @@ visitor. **Desk > Bio links** lists the exact link for each platform:
 
 Counting is cookieless: Desk keeps no IP address and no personal data, only a visitor code
 that changes every day, and the page sends nothing when a browser asks not to be tracked.
-Someone who taps **Book a Workflow Audit** and sends the form arrives in the Inbox with
-`?from=bio&via=ig` (or similar) in the page address, so you can see which bio produced the lead.
+**Book a Workflow Audit** opens a short form on the page itself (the same Formspree form as the
+contact page). Its Desk copy arrives in the Inbox as form `bio` with `links?via=ig` (or similar)
+in the page address, so you can see which bio produced the lead.
 To change a link on the page, edit its `<a>` in `links.html`; keep its `data-link` value the same
 so its history in Desk carries on.
 
