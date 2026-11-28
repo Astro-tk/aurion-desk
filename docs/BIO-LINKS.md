@@ -73,14 +73,19 @@ Short version for print, where nobody can tap: `aurioncreative.com/links`. Visit
 ### The audit form
 
 Tapping **Book a Workflow Audit** folds open a short form under the button, so nobody leaves
-the page. It grows as it is filled in, one step at a time, with a small 1/4 to 4/4 meter:
+the page. It grows as it is filled in, one step at a time, with a small 0/4 to 4/4 meter:
 
 1. **Your name.** The cursor lands here as soon as the panel opens.
 2. **Email** appears once the name is typed (two letters or more).
 3. **What do you need?** (preset to Workflow Audit) and **the work to take off your team**
    appear once the email is a complete address.
-4. **WhatsApp number** (optional), the unticked consent box "Aurion may contact me about this
-   enquiry." and **SEND** appear once they start writing.
+4. **WhatsApp number** (optional) and the unticked consent box "Aurion may contact me about
+   this enquiry." appear once they start writing.
+
+**SEND** appears last, below everything, once the name, email and message are filled in and
+the visitor has moved on from the message (tapped out of it, or into the number or consent
+box). It never pops up while they are still typing. Until then, Enter (Go or Next on a phone
+keyboard) moves to the next field instead of sending.
 
 It is **the same form as the contact page**: it posts to the same Formspree form
 (`xjgqqjdo`) with the same field names (`name`, `email`, `phone`, `service`, `message`,
